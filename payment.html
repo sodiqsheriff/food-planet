@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAYMENT-FOOD-PLANET</title>
+</head>
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    /* Sidebar - same as before */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 240px;
+      background-color: #043204;
+      color: white;
+      padding: 1rem 0;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      padding: 1.4rem 1.5rem;
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #ffca28;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar nav {
+      margin-top: 2rem;
+    }
+
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      color: white;
+      text-decoration: none;
+      font-size: 1.05rem;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: #2e5c52;
+    }
+
+    .sidebar a i {
+      margin-right: 12px;
+      width: 24px;
+      text-align: center;
+    }
+
+    .sidebar .logout {
+      margin-top: auto;
+      color: #ff6b6b;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 240px;
+      padding: 1.5rem 2rem;
+      min-height: 100vh;
+    }
+
+    /* Header / User info */
+    header {
+      display: flex;
+      justify-content:space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .back-btn{
+      font-size: 1.6rem;
+      color: #1a3c34;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+    }
+
+    .notification {
+      font-size: 1.4rem;
+      color: #555;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 280px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent 60%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.8rem;
+    }
+    .back-btn{
+      font-size: 1.6rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .user-info{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+    }
+    .section{
+      background-color: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      max-width: 600px;
+    }
+    .section-title{
+      font-size: 1.3rem;
+      color: #1a3c34;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .address-content{
+      display: grid;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .adderess-icon{
+      font-size: 1.8rem;
+      color: #28a745;
+    }
+    .address-text{
+      flex: 1;
+    }
+    .address-line{
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+    }
+    .edit-icon{
+      color: #1a3c34;
+      cursor: pointer;
+      font-size: 1.3rem;
+    }
+    .delivery-time{
+      font-size: 1rem;
+      color: #555;
+      margin: 2rem 0;
+    }
+    .totl-section{
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .total-label{
+      font-size: 1.2rem;
+      color: #555;
+    }
+    .total-price{
+      font-size: large;
+      font-weight: bold;
+      color: #d32f2f;
+      margin: 0.5rem 0;
+    }
+    .place-order-btn{
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 16px 0;
+      font-size: 1.3rem;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 400px;
+      display: block;
+      margin: 0 auto;
+      transition: 0.2;
+    }
+    .place-order-btn:hover{
+      background-color: #218838;
+    }
+    @media(max-width:768px){
+      .sidebar{width: 220px;}
+      .main-content{margin-left: 220px;}
+    }
+    @media(max-width:768px){
+      .sidebar{
+        width: 100%;
+        height:auto ;
+        position: relative;
+      }
+      .main-content{
+        margin-left: 0%;
+      }
+      .section{
+        padding: 1.2rem;
+      }
+    }
+</style>
+<body>
+    <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="logo.svg" alt="foodlogo">
+      <i class=""></i>
+    
+    </div>
+    <nav>
+      <a href="#" class="active"><img src="homeicon.svg"></i> Home</a>
+      <a href="#"><img src="ordericon.svg"></i> My Orders</a>
+      <a href="#"><img src="profilicon.svg"></i> Profile</a>
+      <a href="#"><img src="logout.svg"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </nav>
+  </aside>
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <header>
+      <a href="#" class="back-btn"><img src="backbtn.svg"></i></a>
+      <div class="user-info">
+        <img src="belll.svg"></i>
+        <img src="lateef.svg" alt="profile picture">
+        <span>Lateef Lateef</span>
+      </div>
+    </header>
+    <section class="hero-top">
+        <h1>Order Comfirmation</h1>
+    </section>
+     <div>
+        <h2>Payment Method</h2></div>
+    </div>
+        <img src="card.svg" alt="credit card">
+        <br>
+         <img src="visa.svg" alt="">
+    </div>
+    <!-- dilevry <address></address> -->
+     <div class="section">
+        <div class="section-title">Delivery Address</div>
+        <div class="address-content">
+            <img src="marker.svg">
+            <div class="address-text">
+                <div class="address-line">Lagos Nigeria</div>
+            </div>
+            <div class="address-line">Koszykowa 82A</div>
+            <div>
+              <img src="edit.svg" alt="">
+            </div>
+        </div>
+        
+        <div class="delivery-time">
+            <strong>Estimate Delivery Time :</strong>20-30 mins
+        </div>
+     </div>
+     <!-- totla&placeholder -->
+      <div class="total-section">
+        <div class="total-label">Total-Price</div>
+        <div class="Total-Price">#20,0000</div>
+        <!-- example-updateas needed -->
+         <button class="place-order-btn">PLACE ORDER</button>
+      </div>
+  </main>
+</body>
+</html>
