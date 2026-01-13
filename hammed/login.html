@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>food Planet</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: rgba(128, 128, 128, 0.301);
+            overflow-y: hidden;
+            max-height: screen;
+            width: 100%;
+            display: flex;
+        }
+        
+        .image{
+            width: 100%;
+            height: auto;
+        }
+        .logo2 img{
+            margin-bottom: 1em;
+            /* margin-left: 1em; */
+            width: 150px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            left: 40%;
+            top: 1%;
+            
+        }
+        .container{
+            width: 200%;
+            display: flex;
+            flex-direction: column;
+            /* align-items: center; */
+            background-color: white;
+            padding: 1em 5em 5em 2em;
+        }
+        .main{
+            display: flex;
+            flex-direction: column;
+            /* background-color: red; */
+            /* align-items: center; */
+            /* justify-content: center; */
+            gap: 1.5em;
+            
+        }
+        .button{
+            display: flex;
+            /* gap: 1em; */
+            justify-content: center;
+        }
+        .facebook a{
+            color: black;
+        }
+        .google{
+            padding: 0.5em 3em 0.5em 3em;
+            /* margin: 0 1em 0 1em; */
+            border-radius: 2em;
+            border: 2em;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            color: white;
+            text-transform: capitalize;
+            background-color: green;
+        }
+        .facebook{
+            padding: 0.5em 3em 0.5em 3em;
+            /* margin: 0 1em 0 1em; */
+            border-radius: 2em;
+            /* border: 2em solid white; */
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: capitalize;
+            cursor: pointer;
+            background: transparent;
+        }
+        .class{
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            /* align-items: center; */
+            margin-top: 2em;
+        }
+        .email input, .password input{
+            width: 75%;
+            padding: 1em;
+            margin-left: 7em;
+            border-radius: 0.5em;
+            border: 1px solid grey;
+            /* font-size: 16px; */
+        }
+        .small{
+            display: flex;
+            justify-content: flex-end;
+            /* margin-top: 0.2em; */
+            margin-right: 3em;
+        }
+        .forgot a{
+            text-decoration: none;
+            color: red;
+            font-size: 18px;
+            text-transform: capitalize;
+        }
+        button[type="submit"]{
+            /* margin-top: 2em; */
+            margin-left: 5em;
+            margin-right: 3em;
+            padding: 1em 3em 1em 3em;
+            border-radius: .5em;
+            /* border: none; */
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            background-color: green;
+            color: white;
+        }
+        button a{
+            color: white;
+            text-decoration: none;
+            text-transform: capitalize;
+        }
+        .register{
+            width: 50%;
+            margin-left: 26%;
+            text-align: center;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            /* background-color: red; */
+            border-bottom: 1px solid grey;
+            padding-bottom: 1em;
+            font-size: 16px;
+            font-weight: 700;
+            
+        }
+        .register a{
+            text-decoration: none;
+            color: red;
+            font-weight: 600;
+        }
+        .logo{
+              /* margin-top: 2em; */
+              
+                display: flex;
+                justify-content: center;
+        }
+        @media only screen and (max-width: 600px){
+            .image{
+                display: none;
+            }
+            .container{
+                width: 100%;
+                height: 100vh;
+                padding: 1em 1em 5em 1em;
+            }
+            .main{
+                /* background-color: red; */
+                padding-top: 2em;
+            }
+            .logo2 img{
+                left: 30%;
+                display: none;
+            }
+            .google, .facebook{
+                display: none;
+            }
+            .email input, .password input{
+                width: 100%;
+                margin-left: 0;
+            }
+            input::placeholder{
+                font-size: 20px;
+                text-transform: capitalize;
+            }
+            .forgot{
+                margin-right: 4em;
+            }
+            button[type="submit"]{
+                /* margin-right: 15em; */
+                margin-left: 0;
+                margin-top: 0;
+                width:100%;
+                /* padding: 0.2em 5em 0.2em 5em; */
+            }
+            .logo{
+                display: none;
+                
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="login-page"> -->
+        <div class="image">
+        <img src="/public/images/wallpaper.svg" alt="">
+        </div>
+        <div class="container">
+            <div class="logo2">
+            <img src="/public/images/logo2.svg" alt="">
+            </div>
+            <form action="">
+                <div class="main">
+                    <div class="button">
+                        <button class="google"><a href="#">login</a></button>
+                        <button class="facebook"><a href="/hammed/signup.html">sign up</a></button>
+                    </div>
+                    <div class="class">
+                    <div class="email">
+                        <input type="email" placeholder="email Address">
+                    </div>
+                    <div class="password">
+                        <input type="password" placeholder="password">
+                    </div>
+                    </div>
+                    <div class="small">
+                
+                        <div class="forgot">
+                            <a href="#">forgot password?</a>
+                        </div>
+                    </div>
+                    <button type="submit"><a href="#">log in</a></button>
+                    <div class="register">
+                        Don't have an account? <a href="#">sign up</a>
+                    </div>
+                    <div class="logo">
+                        <img src="/public/images/icon.svg" alt="Food Planet Logo">
+                    </div>
+                </div>
+            </form>
+        </div>
+    
+</body>
+</html>
