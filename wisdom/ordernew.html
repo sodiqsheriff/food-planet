@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Food Planet - The Burger Joint</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f9fa;
+      color: #222;
+    }
+
+    .app-container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: #1a3c34;
+      color: white;
+      position: fixed;
+      height: 100vh;
+      padding: 1.5rem 0;
+      z-index: 100;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar-header {
+      padding: 0 1.5rem 1.5rem;
+      font-size: 1.6rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .nav-list {
+      list-style: none;
+      margin-top: 2rem;
+    }
+
+    .nav-item {
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+    }
+
+    .nav-item.active,
+    .nav-item:hover {
+      background: rgba(0,0,0,0.15);
+    }
+
+    .user-section {
+      position: absolute;
+      bottom: 2rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 1.5rem;
+    }
+
+    .logout {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    /* Main content */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      padding: 1.5rem 2rem;
+      transition: margin-left 0.3s;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      color: #1a3c34;
+      cursor: pointer;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      color: #1a1a1a;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 500px;
+      background: white;
+      border-radius: 50px;
+      padding: 0.7rem 1.3rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar input {
+      border: none;
+      outline: none;
+      flex: 1;
+      font-size: 1rem;
+    }
+
+    .search-icon {
+      color: #888;
+      margin-right: 0.8rem;
+    }
+
+    .notification {
+      font-size: 1.5rem;
+      color: black;
+      position: relative;
+    }
+
+    /* Banner */
+    .banner {
+      height: 220px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .banner-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+      color: white;
+      padding: 1.2rem;
+    }
+
+    .restaurant-name {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .rating {
+      color: #ffd700;
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .cuisine {
+      font-size: 0.95rem;
+      opacity: 0.95;
+    }
+
+    .price-tag {
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    /* Categories */
+    .categories {
+      display: flex;
+      gap: 0.8rem;
+      overflow-x: auto;
+      padding-bottom: 0.6rem;
+      margin: 1.5rem 0;
+    }
+
+    .category-chip {
+      padding: 0.6rem 1.4rem;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 50px;
+      white-space: nowrap;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .category-chip.active {
+      background: #1a3c34;
+      color: white;
+      border-color: #27ae60;
+    }
+
+    /* Menu items */
+    .menu-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .menu-item {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .menu-thumb {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .menu-info {
+      flex: 1;
+    }
+
+    .menu-name {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .menu-desc {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .menu-price {
+      color: #27ae60;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .quantity-add {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      background: white;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .qty-btn:hover {
+      background: #f0f0f0;
+    }
+
+    .qty-num {
+      min-width: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .add-button {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.3rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .add-button:hover {
+      background: #219653;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .sidebar { width: 260px; }
+      .main-content { margin-left: 260px; }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 1rem;
+      }
+
+      .menu-toggle { display: block; }
+
+      .banner { height: 180px; }
+
+      .menu-item {
+        flex-direction: column;
+      }
+
+      .menu-thumb {
+        width: 100%;
+        height: 160px;
+      }
+
+      header {
+        flex-wrap: wrap;
+      }
+
+      .search-bar {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <i class="fas fa-utensils"></i> FOOD PLANET
+    </div>
+
+    <ul class="nav-list">
+      <li class="nav-item active"><i class="fas fa-home"></i> Home</li>
+      <li class="nav-item"><i class="fas fa-shopping-bag"></i> Mr Orders</li>
+      <li class="nav-item"><i class="fas fa-user"></i> Profile</li>
+    </ul>
+
+    <div class="user-section">
+      <div>@Lateef Lateef</div>
+      <a href="#" class="logout">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main-content">
+
+    <header>
+      <div class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <h1>Find Your Favorite Food</h1>
+
+      <div class="search-bar">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" placeholder="Search restaurants"/>
+      </div>
+
+      <div class="notification">
+        <i class="fas fa-bell"></i>
+      </div>
+    </header>
+
+    <!-- Featured Banner -->
+    <div class="banner">
+      <img src="image5.jpg" 
+           alt="Big Cheeseburger">
+      <div class="banner-info">
+        <div class="restaurant-name">The Burger Joint</div>
+        <div class="rating">★★★★★</div>
+        <div class="cuisine">American • Burgers • Salads</div>
+        <div class="price-tag">N3,000</div>
+      </div>
+    </div>
+
+    <!-- Categories -->
+    <div class="categories">
+      <div class="category-chip active">Burger</div>
+      <div class="category-chip">Pizza</div>
+      <div class="category-chip">Pasta</div>
+      <div class="category-chip">Drinks</div>
+    </div>
+
+    <!-- Menu Items -->
+    <div class="menu-items">
+
+      <div class="menu-item">
+        <img src="fish.svg" 
+             alt="Fish Burger" class="menu-thumb">
+        <div class="menu-info">
+          <div class="menu-name">Fish Burger</div>
+          <div class="menu-desc">Fish</div>
+          <div class="menu-price">N1,500</div>
+        </div>
+        <div class="quantity-add">
+          <div class="qty-control">
+            <div class="qty-btn"><i class="fas fa-minus"></i></div>
+            <span class="qty-num">1</span>
+            <div class="qty-btn"><i class="fas fa-plus"></i></div>
+          </div>
+          <button class="add-button">Add</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="cheese.svg" 
+             alt="Cheese Burger" class="menu-thumb">
+        <div class="menu-info">
+          <div class="menu-name">Cheese Burger</div>
+          <div class="menu-desc">Cheese</div>
+          <div class="menu-price">N2,500</div>
+        </div>
+        <div class="quantity-add">
+          <div class="qty-control">
+            <div class="qty-btn"><i class="fas fa-minus"></i></div>
+            <span class="qty-num">1</span>
+            <div class="qty-btn"><i class="fas fa-plus"></i></div>
+          </div>
+          <button class="add-button">Add</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="veggie.svg" 
+             alt="Veggie Burger" class="menu-thumb">
+        <div class="menu-info">
+          <div class="menu-name">Veggie Burger</div>
+          <div class="menu-desc">Veggie</div>
+          <div class="menu-price">N3,500</div>
+        </div>
+        <div class="quantity-add">
+          <div class="qty-control">
+            <div class="qty-btn"><i class="fas fa-minus"></i></div>
+            <span class="qty-num">1</span>
+            <div class="qty-btn"><i class="fas fa-plus"></i></div>
+          </div>
+          <button class="add-button">Add</button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<script>
+  // Mobile sidebar toggle
+  const menuToggle = document.getElementById('menu-toggle');
+  const sidebar = document.getElementById('sidebar');
+
+  menuToggle?.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>

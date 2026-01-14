@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Food Planet - Cart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f9fa;
+      color: #222;
+    }
+
+    .app-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR (desktop + mobile slide-in) ──────────────────────── */
+    .sidebar {
+      width: 280px;
+      background: #1a3c34;
+      color: white;
+      position: fixed;
+      height: 100vh;
+      padding: 1.5rem 0;
+      z-index: 100;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar-header {
+      padding: 0 1.5rem 1.5rem;
+      font-size: 1.6rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .nav-list {
+      list-style: none;
+      margin-top: 2rem;
+    }
+
+    .nav-item {
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+    }
+
+    .nav-item.active,
+    .nav-item:hover {
+      background: rgba(0,0,0,0.15);
+    }
+
+    .nav-item i {
+      font-size: 1.3rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .user-section {
+      position: absolute;
+      bottom: 2rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 1.5rem;
+    }
+
+    .logout {
+      margin-top: 1rem;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    /* ── MAIN CONTENT ─────────────────────────────────────────────── */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      padding: 1.5rem 2rem;
+      transition: margin-left 0.3s;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      color: #27ae60;
+      cursor: pointer;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    /* ── CART ─────────────────────────────────────────────────────── */
+    .cart-container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .cart-header {
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .back-btn {
+      font-size: 1.5rem;
+      color: #27ae60;
+      cursor: pointer;
+    }
+
+    .cart-items {
+      padding: 1rem;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .item-image {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .item-info {
+      flex: 1;
+    }
+
+    .item-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .item-desc {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .item-price {
+      color: #27ae60;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 0.6rem;
+    }
+
+    .qty-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      background: white;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .qty-btn:hover {
+      background: #f8f8f8;
+    }
+
+    .qty-value {
+      min-width: 24px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .cart-summary {
+      padding: 1.5rem;
+      border-top: 1px solid #eee;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .total-row {
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding-top: 0.8rem;
+      border-top: 1px dashed #ccc;
+      margin-top: 0.5rem;
+    }
+
+    .checkout-btn {
+      background: #27ae60;
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 10px;
+      margin-top: 1.2rem;
+      cursor: pointer;
+    }
+    .back{
+      background:gray;
+      color:white;
+      border: none;
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 10px;
+      margin-top: 1.2rem;
+      cursor: pointer;
+    }
+
+    .checkout-btn:hover {
+      background: #219653;
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────────────────── */
+    @media (max-width: 992px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 1rem;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .cart-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .cart-layout {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .cart-items-section {
+        flex: 1;
+      }
+
+      .cart-summary {
+        width: 360px;
+        border-left: 1px solid #eee;
+        border-top: none;
+      }
+
+      .cart-item {
+        padding: 1.5rem 0;
+      }
+
+      .item-image {
+        width: 110px;
+        height: 110px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cart-item {
+        flex-direction: column;
+      }
+
+      .item-image {
+        width: 100%;
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-wrapper">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <i class="fas fa-utensils"></i> FOOD PLANET
+    </div>
+
+    <ul class="nav-list">
+      <li class="nav-item"><i class="fas fa-home"></i> Home</li>
+      <li class="nav-item"><i class="fas fa-shopping-bag"></i> Mr Orders</li>
+      <li class="nav-item active"><i class="fas fa-user"></i> Profile</li>
+    </ul>
+
+    <div class="user-section">
+      <div>@Lateef Lateef</div>
+      <a href="#" class="logout">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <header>
+      <div class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <h1>Cart</h1>
+    </header>
+
+    <div class="cart-container">
+
+      <div class="cart-layout">
+
+        <div class="cart-items-section">
+
+          <div class="cart-items">
+
+            <!-- Item 1 -->
+            <div class="cart-item">
+              <img src="fish.svg" 
+                   alt="" class="item-image">
+              <div class="item-info">
+                <div class="item-name">Fish Burger</div>
+                <div class="item-desc">Fish</div>
+                <div class="item-price">₦2,500</div>
+                <div class="quantity-control">
+                  <div class="qty-btn"><i class="fas fa-minus"></i></div>
+                  <span class="qty-value">1</span>
+                  <div class="qty-btn"><i class="fas fa-plus"></i></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="cart-item">
+              <img src="veggie.svg" 
+                   alt="" class="item-image">
+              <div class="item-info">
+                <div class="item-name">Veggie Burger</div>
+                <div class="item-desc">Veggie</div>
+                <div class="item-price">₦2,500</div>
+                <div class="quantity-control">
+                  <div class="qty-btn"><i class="fas fa-minus"></i></div>
+                  <span class="qty-value">1</span>
+                  <div class="qty-btn"><i class="fas fa-plus"></i></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="cart-item">
+              <img src="cola.svg" 
+                   alt="Coca-Cola" class="item-image">
+              <div class="item-info">
+                <div class="item-name">Coca-Cola</div>
+                <div class="item-desc"></div>
+                <div class="item-price">₦800</div>
+                <div class="quantity-control">
+                  <div class="qty-btn"><i class="fas fa-minus"></i></div>
+                  <span class="qty-value">1</span>
+                  <div class="qty-btn"><i class="fas fa-plus"></i></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Summary -->
+        <div class="cart-summary">
+          <div class="summary-row">
+            <span>Total</span>
+            <span>₦8,100</span>
+          </div>
+          <div class="summary-row">
+            <span>Delivery Fee</span>
+            <span>₦800</span>
+          </div>
+          <div class="total-row">
+            <span>Checkout</span>
+            <span>₦8,900</span>
+          </div>
+          <button class="checkout-btn">Checkout ₦8,900>
+            <button class="back" back to menu</button>
+          </button>
+        </div>
+        
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<script>
+  // Mobile sidebar toggle
+  const menuToggle = document.getElementById('menu-toggle');
+  const sidebar = document.getElementById('sidebar');
+
+  menuToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>

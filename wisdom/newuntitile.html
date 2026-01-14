@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Food Planet - Restaurants</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
+
+    /* ── DESKTOP ── Sidebar + Grid ─────────────────────────────────────── */
+    .app-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: #1a3c34;
+      color: white;
+      position: fixed;
+      height: 100%;
+      padding: 1.5rem 0;
+      transition: transform 0.3s;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      padding: 0 1.5rem 1.5rem;
+      font-size: 1.6rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .nav-list {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .nav-item {
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+    }
+
+    .nav-item.active,
+    .nav-item:hover {
+      background: rgba(0,0,0,0.15);
+    }
+
+    .main-content {
+      margin-left: 260px;
+      flex: 1;
+      padding: 1.5rem 2rem;
+      transition: margin-left 0.3s;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.8rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      color: #1a1a1a;
+    }
+
+    .search-container {
+      flex: 1;
+      max-width: 480px;
+      background: white;
+      border-radius: 50px;
+      padding: 0.7rem 1.3rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      display: flex;
+      align-items: center;
+    }
+
+    .search-container input {
+      border: none;
+      outline: none;
+      flex: 1;
+      font-size: 1rem;
+    }
+
+    .search-icon {
+      color: #888;
+      margin-right: 0.8rem;
+    }
+
+    .filters {
+      display: flex;
+      gap: 0.8rem;
+      margin: 1.2rem 0 1.8rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .filter-chip {
+      padding: 0.6rem 1.4rem;
+      background: white;
+      border-radius: 50px;
+      border: 1px solid #ddd;
+      white-space: nowrap;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .filter-chip.active {
+      background: #27ae60;
+      color: white;
+      border-color: #27ae60;
+    }
+
+    .restaurant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.6rem;
+    }
+
+    .restaurant-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      transition: all 0.2s;
+    }
+
+    .restaurant-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1.2rem;
+    }
+
+    .restaurant-name {
+      font-size: 1.25rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .cuisine {
+      color: #666;
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .rating {
+      background: #27ae60;
+      color: white;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .price {
+      font-weight: 600;
+    }
+
+    /* ── MOBILE ── List + Bottom Nav ───────────────────────────────────── */
+    @media (max-width: 992px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+
+      .back-btn {
+        font-size: 1.4rem;
+        color: #27ae60;
+        cursor: pointer;
+      }
+
+      .search-container {
+        width: 100%;
+      }
+
+      .filters {
+        margin: 1rem 0;
+      }
+
+      .restaurant-grid {
+        display: block;
+      }
+
+      .restaurant-card {
+        margin-bottom: 1.2rem;
+        border-radius: 12px;
+      }
+
+      .card-image {
+        height: 180px;
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-top: 1px solid #eee;
+        display: flex;
+        justify-content: space-around;
+        padding: 0.6rem 0;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+        z-index: 99;
+      }
+
+      .nav-item-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 0.75rem;
+        color: #666;
+        gap: 0.3rem;
+      }
+
+      .nav-item-mobile.active {
+        color: #27ae60;
+      }
+
+      .nav-item-mobile i {
+        font-size: 1.5rem;
+      }
+
+      /* Extra spacing for bottom nav */
+      .main-content {
+        padding-bottom: 80px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card-image {
+        height: 160px;
+      }
+
+      .restaurant-name {
+        font-size: 1.15rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-wrapper">
+
+  <!-- Sidebar (desktop only) -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="logo.svg">
+    </div>
+    <ul class="nav-list">
+      <li class="nav-item active"><img src="homeicon.svg"> Home</li>
+      <li class="nav-item"><img src="ordericon.svg"> Orders</li>
+      <li class="nav-item"><img src="profilicon.svg"> Profile</li>
+      <li class="nav-item"><img src="logout.svg"></i> Logout</li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <header>
+  
+      <h1>Find Your Favorite Food</h1>
+      <!-- <img src="belll.svg" alt=""> -->
+      <div class="profile-icon">
+      <img src="belll.svg" alt="">
+        <img src="lateef.svg">Lateef Lateef</div>
+    </header>
+
+    <div class="search-container">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" placeholder="Search restaurants"/>
+    </div>
+
+    <div class="filters">
+      <div class="filter-chip active">All</div>
+      <div class="filter-chip">Burgers</div>
+      <div class="filter-chip">Pizza</div>
+      <div class="filter-chip">Sushi</div>
+      <div class="filter-chip">Pasta</div>
+      <div class="filter-chip">Salads</div>
+      <div class="filter-chip">Snacks</div>
+    </div>
+
+    <div class="restaurant-grid">
+
+      <!-- Example Restaurant Card -->
+      <div class="restaurant-card">
+        <img src="image1.jpg" 
+             alt="" class="card-image">
+        <div class="card-body">
+          <div class="restaurant-name">Justrite</div>
+          <div class="cuisine">Nigeria * Snacks</div>
+          <div class="card-meta">
+            <span>10-25 min</span>
+            <span class="price"></span>
+            <span class="rating">4.7</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card">
+        <img src="image2.jpg" 
+             alt="" class="card-image">
+        <div class="card-body">
+          <div class="restaurant-name">Sakura Sushi</div>
+          <div class="cuisine">Japanes • Sushi</div>
+          <div class="card-meta">
+            <span>30-45 min</span>
+            <span class="price"></span>
+            <span class="rating">4.6</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card">
+        <img src="image1.jpg" 
+             alt="Pizza" class="card-image">
+        <div class="card-body">
+          <div class="restaurant-name">Justrite</div>
+          <div class="cuisine">Nigerian • Snacke</div>
+          <div class="card-meta">
+            <span>10-15min</span>
+            <span class="price"></span>
+            <span class="rating">4.5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add more cards here -->
+       <div class="restaurant-card">
+        <img src="image4.jpg" 
+             alt="" class="card-image">
+        <div class="card-body">
+          <div class="restaurant-name">Mama Kitchen</div>
+          <div class="cuisine">Nigeria• Salad</div>
+          <div class="card-meta">
+            <span>20-35 min</span>
+            <span class="price"></span>
+            <span class="rating">4.7</span>
+          </div>
+        </div>
+      </div>
+      <div class="restaurant-card">
+        <img src="image1.jpg" 
+             alt="Burger" class="card-image">
+        <div class="card-body">
+          <div class="restaurant-name">Justrite</div>
+          <div class="cuisine">Nigeria • Snack</div>
+          <div class="card-meta">
+            <span>10-15 min</span>
+            <span class="price"></span>
+            <span class="rating">4.7</span>
+          </div>
+        </div>
+      </div>
+      <div class="restaurant-card">
+        <img src="image5.jpg" 
+             alt="Burger" class="card-image">
+        <div class="card-body">
+          <div class="restaurant-name">The Burger Joint</div>
+          <div class="cuisine">American • Burgers </div>
+          <div class="card-meta">
+            <span>20-35 min</span>
+            <span class="price"></span>
+            <span class="rating">4.7</span>
+          </div>
+        </div>
+      </div>
+      <div class="restaurant-card">
+        <img src="image1.jpg" 
+             alt="Burger" class="card-image">
+        <div class="card-body">
+          <div class="restaurant-name">Justrite</div>
+          <div class="cuisine">Nigeria • Snack</div>
+          <div class="card-meta">
+            <span>20-35 min</span>
+            <span class="price"></span>
+            <span class="rating">4.7</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<!-- Bottom Navigation (mobile only) -->
+<div class="bottom-nav">
+  <div class="nav-item-mobile active">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
+  </div>
+  <div class="nav-item-mobile">
+    <i class="fas fa-search"></i>
+    <span>Search</span>
+  </div>
+  <div class="nav-item-mobile">
+    <i class="fas fa-shopping-bag"></i>
+    <span>Orders</span>
+  </div>
+  <div class="nav-item-mobile">
+    <i class="fas fa-user"></i>
+    <span>Profile</span>
+  </div>
+</div>
+
+</body>
+</html>
