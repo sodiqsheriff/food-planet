@@ -1,0 +1,177 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodHunt Verification</title>
+  
+</head>
+<style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  height: 100vh;
+}
+
+/* Main Layout */
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Left Section */
+.left-section {
+  flex: 1;
+  background: linear-gradient(to bottom, #f8fff9, #ffffff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.food-image {
+  width: 80%;
+  z-index: 2;
+}
+
+.leaf {
+  position: absolute;
+  width: 60px;
+  opacity: 0.8;
+}
+
+.leaf-1 {
+  top: 40px;
+  left: 40px;
+}
+
+.leaf-2 {
+  bottom: 80px;
+  right: 80px;
+}
+
+/* Right Section */
+.right-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verification-card {
+  width: 380px;
+  padding: 40px 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.logo img {
+  width: 120px;
+  margin-bottom: 25px;
+}
+
+.verification-card h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.verification-card p {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+/* Code Inputs */
+.code-inputs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.code-inputs input {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 18px;
+  outline: none;
+}
+
+.code-inputs input:focus {
+  border-color: #4caf50;
+}
+
+/* Button */
+.verify-btn {
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to right, #2e7d32, #4caf50);
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.verify-btn:hover {
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left-section {
+    height: 45vh;
+  }
+}
+</style>
+<body>
+
+  <div class="container">
+
+    <!-- Left Section -->
+    <div class="left-section">
+      <img src="/public/images/food.svg">
+      
+    </div>
+
+    <!-- Right Section -->
+    <div class="right-section">
+      <div class="verification-card">
+
+        <div class="logo">
+          <img src="/public/images/foodlogo.svg"> 
+        </div>
+
+        <h2>Verification Code</h2>
+        <p>Enter your verification code</p>
+
+        <div class="code-inputs">
+          <input type="text" maxlength="1">
+          <input type="text" maxlength="1">
+          <input type="text" maxlength="1">
+          <input type="text" maxlength="1">
+        </div>
+
+        <button class="verify-btn">Verify</button>
+
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

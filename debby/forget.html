@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FoodPlanner - Forget Password</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #ffffff;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+  
+    /* LEFT SECTION */
+.left-section {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9f9f9;
+}
+
+.food-img {
+    width: 80%;
+    max-width: 500px;
+}
+
+/* RIGHT SECTION */
+.right-section {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* LOGO */
+.logo img {
+    width: 120px;
+    margin-bottom: 30px;
+}
+
+/* FORM BOX */
+.form-box {
+    width: 80%;
+    max-width: 350px;
+    padding: 30px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.form-box h2 {
+    margin-bottom: 20px;
+    color: #2f2f2f;
+}
+
+/* INPUT */
+.input-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.input-box .icon {
+    margin-right: 8px;
+}
+
+.input-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+/* BUTTON */
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background: linear-gradient(to right, #0b7a2a, #0f9d3a);
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+ /*responsive*/
+  @media (max-width:768px){
+    .container{
+        flex-direction: column;
+    }
+  }
+</style>
+<body>
+
+<div class="container">
+
+    <!-- LEFT IMAGE SECTION -->
+    <div class="left-section">
+        <img src="/public/images/food.svg" alt="images">
+    </div>
+
+    <!-- RIGHT FORM SECTION -->
+    <div class="right-section">
+
+        <div class="logo">
+            <img src="/public/images/foodlogo.svg" alt="images">
+        </div>
+
+        <div class="form-box">
+            <h2>Forget Password?</h2>
+
+            <div class="input-box">
+                <span class="icon"></span>
+                <input type="email" placeholder="Email Address">
+            </div>
+
+            <button class="btn">Proceed</button>
+        </div>
+
+    </div>
+
+</div>

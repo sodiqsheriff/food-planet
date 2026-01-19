@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+   *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: arial, sans-serif;
+   }
+  body{
+    background-color: ffffff;
+  }
+   .container{
+    display: flex;
+    height: 100vh;
+   }
+    /*left side*/
+    .left{
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+      .food-image {
+        width: 80%;
+        max-width: 500px;
+      }
+          
+         /*right side*/
+         .right{
+            width: 50%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+         }        
+         .logo{
+            position: absolute;
+            top: 30px;
+         }
+         .logo img{
+            width: 120px;
+         }
+         .card{
+            background-color: ffffff;
+            padding: 40px;
+            width: 320px;
+            text-align: center;
+            border-radius: 15px;
+         }
+         .icon{
+            font-size: 60px;
+            margin-bottom: 15px;
+         }
+         .card h2{
+            font-size: 22px;
+            color: rgb(0, 65, 0);
+            margin-bottom: 25px;
+         }
+         .card button{
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background-color: green;
+            color: white;
+            font-size: 16px;
+            cursor:pointer;
+         }
+        .card button:hover{
+            background-color: #166532;
+        }
+          /*responsive*/
+  @media (max-width:768px){
+    .container{
+        flex-direction: column;
+    }
+  }
+                  
+         
+      
+   </style> 
+</head>
+<body>
+    <div class="container">
+        <!--left section-->
+      <div class="left">
+        <img src="/public/images/food.svg">
+    </div>
+    <!--right section-->
+    <div class="right">
+        <div class="logo">
+            <img src="/public/images/foodlogo.svg">
+    </div>
+    <div class="card">
+        <div class="icon"><img src="/public/icons/id.svg"></div>
+        <h2>Account created<br>successfully</h2>
+        <button>order a meal</button>
+    </div>
+    </div>
+</body>
+</html>
