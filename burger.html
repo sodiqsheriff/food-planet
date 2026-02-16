@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Burger Joint - Food Planet</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/burger.css" />
+  </head>
+  <body>
+    <!-- Sidebar (desktop only) -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="images/logo.svg" alt="Food Planet" style="height: 40px" />
+      </div>
+      <ul class="nav-list">
+        <li class="nav-item" onclick="window.location.href = 'index.html'">
+          <i class="fas fa-home"></i> Home
+        </li>
+        <li
+          class="nav-item"
+          onclick="window.location.href = 'order-confirmation.html'"
+        >
+          <i class="fas fa-shopping-bag"></i> Orders
+        </li>
+        <li class="nav-item" onclick="window.location.href = 'account.html'">
+          <i class="fas fa-user"></i> Profile
+        </li>
+        <li
+          class="nav-item"
+          onclick="alert('Logout functionality to be implemented')"
+        >
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header>
+        <h1>The Burger Joint</h1>
+        <div class="profile-section">
+          <div class="user-info">
+            <i
+              class="fas fa-bell"
+              style="margin-right: 15px; color: var(--primary-color)"
+            ></i>
+            <img src="images/lateef.svg" class="user-avatar" alt="User" />
+            <span>Lateef Lateef</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="hero-top" style="margin-bottom: 1rem">
+        <div class="search-container">
+          <i class="fas fa-search search-icon"></i>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search menu..."
+          />
+        </div>
+      </section>
+
+      <!-- Hero Banner -->
+      <div class="hero">
+        <img src="images/image5.jpg" alt="Double Cheeseburger" />
+        <div class="hero-overlay">
+          <h1 class="restaurant-title">The Burger Joint</h1>
+          <div class="restaurant-info">
+            <span class="stars">★★★★★</span>
+            <span class="cuisine">American • Burgers • Salads</span>
+            <span class="price-range">₦3,000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories -->
+      <div class="categories">
+        <button class="category-btn active">Burger</button>
+        <button class="category-btn">Pizza</button>
+        <button class="category-btn">Pasta</button>
+        <button class="category-btn">Drinks</button>
+      </div>
+
+      <!-- Menu Items -->
+      <div class="menu-container">
+        <!-- Fish Burger -->
+        <div class="menu-item">
+          <img src="images/fish.svg" alt="Fish Burger" />
+          <div class="menu-details">
+            <h3 class="menu-name">Fish Burger</h3>
+            <p class="menu-desc">
+              Delicious fish patty with fresh lettuce and tartar sauce.
+            </p>
+            <div class="menu-bottom">
+              <span class="price">₦1,500</span>
+              <div class="quantity-control">
+                <button class="qty-btn">-</button>
+                <span class="qty-value">1</span>
+                <button class="qty-btn">+</button>
+              </div>
+              <button class="add-btn">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cheese Burger -->
+        <div class="menu-item">
+          <img src="images/cheese.svg" alt="Cheese Burger" />
+          <div class="menu-details">
+            <h3 class="menu-name">Cheese Burger</h3>
+            <p class="menu-desc">
+              Classic beef patty topped with melted cheddar cheese.
+            </p>
+            <div class="menu-bottom">
+              <span class="price">₦2,500</span>
+              <div class="quantity-control">
+                <button class="qty-btn">-</button>
+                <span class="qty-value">1</span>
+                <button class="qty-btn">+</button>
+              </div>
+              <button class="add-btn">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Veggie Burger -->
+        <div class="menu-item">
+          <img src="images/veggie.svg" alt="Veggie Burger" />
+          <div class="menu-details">
+            <h3 class="menu-name">Veggie Burger</h3>
+            <p class="menu-desc">
+              Healthy plant-based patty with avocado and sprouts.
+            </p>
+            <div class="menu-bottom">
+              <span class="price">₦3,500</span>
+              <div class="quantity-control">
+                <button class="qty-btn">-</button>
+                <span class="qty-value">1</span>
+                <button class="qty-btn">+</button>
+              </div>
+              <button class="add-btn">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bottom Navigation (mobile only) -->
+    <div class="bottom-nav">
+      <div
+        class="nav-item-mobile"
+        onclick="window.location.href = 'index.html'"
+      >
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </div>
+      <div class="nav-item-mobile">
+        <i class="fas fa-search"></i>
+        <span>Search</span>
+      </div>
+      <div
+        class="nav-item-mobile"
+        onclick="window.location.href = 'order-confirmation.html'"
+      >
+        <i class="fas fa-shopping-bag"></i>
+        <span>Orders</span>
+      </div>
+      <div
+        class="nav-item-mobile"
+        onclick="window.location.href = 'account.html'"
+      >
+        <i class="fas fa-user"></i>
+        <span>Profile</span>
+      </div>
+    </div>
+  </body>
+</html>

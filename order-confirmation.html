@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Planet - Order Confirmation</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/order.css" />
+  </head>
+  <body>
+    <div class="app-wrapper">
+      <!-- Sidebar (desktop only) -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <img src="images/logo.svg" alt="Food Planet" style="height: 40px" />
+        </div>
+        <ul class="nav-list">
+          <li class="nav-item" onclick="window.location.href = 'index.html'">
+            <i class="fas fa-home"></i> Home
+          </li>
+          <li
+            class="nav-item active"
+            onclick="window.location.href = 'order-confirmation.html'"
+          >
+            <i class="fas fa-shopping-bag"></i> Orders
+          </li>
+          <li class="nav-item" onclick="window.location.href = 'account.html'">
+            <i class="fas fa-user"></i> Profile
+          </li>
+          <li
+            class="nav-item"
+            onclick="alert('Logout functionality to be implemented')"
+          >
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <header>
+          <div
+            class="back-arrow"
+            onclick="window.history.back()"
+            style="cursor: pointer"
+          >
+            <i class="fas fa-arrow-left"></i>
+          </div>
+          <h1>Order Confirmation</h1>
+          <div class="profile-section">
+            <div class="user-info">
+              <i
+                class="fas fa-bell"
+                style="margin-right: 15px; color: var(--primary-color)"
+              ></i>
+              <img src="images/lateef.svg" class="user-avatar" alt="User" />
+              <span>Lateef Lateef</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="confirmation-card">
+          <div class="section-title">Payment Method</div>
+
+          <div class="payment-method selected">
+            <div class="radio selected"></div>
+            <i class="fab fa-cc-mastercard card-icon"></i>
+            <div class="card-details">
+              <div class="card-type">Credit Card</div>
+              <div class="card-number">**** **** **** 3302</div>
+            </div>
+          </div>
+
+          <div class="payment-method">
+            <div class="radio"></div>
+            <i class="fab fa-cc-visa card-icon"></i>
+            <div class="card-details">
+              <div class="card-type">Debit Card</div>
+              <div class="card-number">**** **** **** 1906</div>
+            </div>
+          </div>
+
+          <div class="section-title">Delivery Address</div>
+
+          <div class="address-block">
+            <div class="address-row">
+              <i class="fas fa-map-marker-alt address-icon"></i>
+              <div>
+                <strong>Lagos, Nigeria</strong><br />
+                Koszykowa 82A, Lagos
+              </div>
+              <i class="fas fa-pencil-alt edit-icon"></i>
+            </div>
+            <div class="delivery-time">
+              Estimated delivery time: <strong>20-30 min</strong>
+            </div>
+          </div>
+
+          <button class="place-order-btn">Place Order</button>
+        </div>
+      </main>
+    </div>
+
+    <!-- Bottom Navigation (mobile only) -->
+    <div class="bottom-nav">
+      <div
+        class="nav-item-mobile"
+        onclick="window.location.href = 'index.html'"
+      >
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </div>
+      <div
+        class="nav-item-mobile"
+        onclick="window.location.href = 'index.html'"
+      >
+        <!-- Search goes to home for now as search is there -->
+        <i class="fas fa-search"></i>
+        <span>Search</span>
+      </div>
+      <div
+        class="nav-item-mobile active"
+        onclick="window.location.href = 'order-confirmation.html'"
+      >
+        <i class="fas fa-shopping-bag"></i>
+        <span>Orders</span>
+      </div>
+      <div
+        class="nav-item-mobile"
+        onclick="window.location.href = 'account.html'"
+      >
+        <i class="fas fa-user"></i>
+        <span>Profile</span>
+      </div>
+    </div>
+
+    <script>
+      // Simple payment selection (demo)
+      document.querySelectorAll(".payment-method").forEach((item) => {
+        item.addEventListener("click", () => {
+          document
+            .querySelectorAll(".payment-method")
+            .forEach((i) => i.classList.remove("selected"));
+          item.classList.add("selected");
+          document
+            .querySelectorAll(".radio")
+            .forEach((r) => r.classList.remove("selected"));
+          item.querySelector(".radio").classList.add("selected");
+        });
+      });
+    </script>
+  </body>
+</html>
